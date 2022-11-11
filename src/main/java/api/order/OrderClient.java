@@ -1,12 +1,16 @@
+package api.order;
+
+import api.Client;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 
 import static io.restassured.RestAssured.given;
 
-public class OrderClient extends Client{
+public class OrderClient extends Client {
     private static final String ORDER_PATH = "api/v1/orders/";
-    @Step("Create new order using Order")
+
+    @Step("Create new order using api.order.Order")
     public Response createOrder(Order order) {
         return given()
                 .spec(getSpec())
@@ -14,6 +18,7 @@ public class OrderClient extends Client{
                 .when()
                 .post(ORDER_PATH);
     }
+
     @Step("Request a list of orders")
     public ValidatableResponse getOrdersList() {
         return given()

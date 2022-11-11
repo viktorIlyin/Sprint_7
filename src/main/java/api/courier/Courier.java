@@ -1,4 +1,5 @@
-import org.apache.commons.lang3.RandomStringUtils;
+package api.courier;
+
 
 public class Courier {
     private String login;

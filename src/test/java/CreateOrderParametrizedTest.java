@@ -1,34 +1,32 @@
-
+import api.order.Order;
+import api.order.OrderClient;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import io.qameta.allure.Description;
-import org.hamcrest.Matcher;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import java.util.List;
-
-import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.*;
 
 @RunWith(Parameterized.class)
 public class CreateOrderParametrizedTest {
+    static String[] black = {"BLACK"};
+    static String[] grey = {"GREY"};
+    static String[] blackGrey = {"BLACK", "GREY"};
+    private final String[] color;
 
-    private final List<String> color;
-    private final Matcher<Object> expected;
-
-    public CreateOrderParametrizedTest(List<String> color, Matcher<Object> expected) {
+    public CreateOrderParametrizedTest(String[] color) {
         this.color = color;
-        this.expected = expected;
+
     }
 
-    @Parameterized.Parameters()
+    @Parameterized.Parameters(name = "Тестовые данные: {0}")
     public static Object[][] getColorData() {
         return new Object[][]{
-                {List.of("BLACK", "GREY"), notNullValue()},
-                {List.of("BLACK"), notNullValue()},
-                {List.of("GREY"), notNullValue()},
-                {null, notNullValue()}
+                {black},
+                {grey},
+                {blackGrey},
         };
     }
 
@@ -41,6 +39,6 @@ public class CreateOrderParametrizedTest {
         Response createOrderResponse = orderClient.createOrder(order);
         createOrderResponse.then().assertThat().statusCode(201)
                 .and()
-                .body("track", expected);
+                .body("track", is(notNullValue()));
     }
 }

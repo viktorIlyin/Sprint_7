@@ -1,3 +1,5 @@
+package api.courier;
+
 public class Credential {
     private String login;
     private String password;
@@ -7,8 +9,8 @@ public class Credential {
         this.password = password;
     }
 
-    public static Credential from(Courier courier){
-        return new Credential(courier.getLogin(),courier.getPassword());
+    public static Credential from(Courier courier) {
+        return new Credential(courier.getLogin(), courier.getPassword());
     }
 
     public String getLogin() {
@@ -26,7 +28,6 @@ public class Credential {
     public void setPassword(String password) {
         this.password = password;
     }
-
 
 
 }

@@ -1,5 +1,6 @@
+package api.order;
+
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class Order {
     private String firstName;
@@ -10,10 +11,10 @@ public class Order {
     private int rentTime;
     private String deliveryDate;
     private String comment;
-    private List<String> color;
+    private String[] color;
 
 
-    public Order(List<String> color) {
+    public Order(String[] color) {
         this.address = "ул. Пушкина, дом Колотушкина, 1";
         this.firstName = "Виктор";
         this.lastName = "Ильин";

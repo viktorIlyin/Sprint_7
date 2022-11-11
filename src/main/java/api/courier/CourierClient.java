@@ -1,16 +1,18 @@
+package api.courier;
 
+import api.Client;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 
 import static io.restassured.RestAssured.given;
 
-public class CourierClient extends Client{
+public class CourierClient extends Client {
     private final static String PATH = "/api/v1/courier";
     private final static String LOGIN_PATH = "/api/v1/courier/login";
     private final static String DELETE_PATH = "/api/v1/courier";
 
     @Step("Create new courier with login:{courier.login} password:{courier.password} firstName:{courier.firstName}")
-    public ValidatableResponse create(Courier courier){
+    public ValidatableResponse create(Courier courier) {
         return given()
                 .spec(getSpec())
                 .body(courier)
@@ -18,8 +20,9 @@ public class CourierClient extends Client{
                 .post(PATH)
                 .then();
     }
+
     @Step("Delete courier with id")
-    public ValidatableResponse delete(int id){
+    public ValidatableResponse delete(int id) {
         return given()
                 .spec(getSpec())
                 .when()
@@ -28,7 +31,7 @@ public class CourierClient extends Client{
     }
 
     @Step("Login courier with login:{credentials.login} password:{credentials.password}")
-    public ValidatableResponse login(Credential credential){
+    public ValidatableResponse login(Credential credential) {
         return given()
                 .spec(getSpec())
                 .body(credential)
